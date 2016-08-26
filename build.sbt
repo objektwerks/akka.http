@@ -4,7 +4,7 @@ version := "0.1-SNAPSHOT"
 scalaVersion := "2.11.8"
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 libraryDependencies ++= {
-  val akkaVersion = "2.4.8"
+  val akkaVersion = "2.4.9"
   Seq(
     "com.typesafe.akka" % "akka-actor_2.11" % akkaVersion,
     "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion,
@@ -13,7 +13,7 @@ libraryDependencies ++= {
     "com.typesafe" % "config" % "1.3.0",
     "ch.qos.logback" % "logback-classic" % "1.1.3",
     "com.typesafe.akka" % "akka-http-testkit-experimental_2.11" % "2.4.2-RC3" % "test",
-    "org.scalatest" % "scalatest_2.11" % "2.2.5" % "test"
+    "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test"
   )
 }
 scalacOptions ++= Seq(
