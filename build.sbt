@@ -1,31 +1,36 @@
 name := "akka.http"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.1"
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 libraryDependencies ++= {
-  val akkaVersion = "2.4.11"
+  val akkaVersion = "2.4.14"
+  val akkkHttpVersion = "10.0.0"
   Seq(
-    "com.typesafe.akka" % "akka-actor_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-slf4j_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-http-experimental_2.11" % akkaVersion,
-    "com.typesafe.akka" % "akka-http-spray-json-experimental_2.11" % akkaVersion,
-    "com.typesafe" % "config" % "1.3.0",
-    "ch.qos.logback" % "logback-classic" % "1.1.3",
-    "com.typesafe.akka" % "akka-http-testkit-experimental_2.11" % "2.4.2-RC3" % "test",
-    "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test"
+    "com.typesafe.akka" % "akka-actor_2.12" % akkaVersion,
+    "com.typesafe.akka" % "akka-slf4j_2.12" % akkaVersion,
+    "com.typesafe.akka" % "akka-http_2.12" % akkkHttpVersion,
+    "com.typesafe.akka" % "akka-http-spray-json_2.12" % akkkHttpVersion,
+    "com.typesafe" % "config" % "1.3.1",
+    "ch.qos.logback" % "logback-classic" % "1.1.7",
+    "com.typesafe.akka" % "akka-http-testkit_2.12" % akkkHttpVersion % "test",
+    "org.scalatest" % "scalatest_2.12" % "3.0.1" % "test"
   )
 }
 scalacOptions ++= Seq(
   "-language:postfixOps",
-  "-language:implicitConversions",
   "-language:reflectiveCalls",
+  "-language:implicitConversions",
   "-language:higherKinds",
   "-feature",
+  "-Ywarn-unused-import",
+  "-Ywarn-unused",
+  "-Ywarn-dead-code",
   "-unchecked",
   "-deprecation",
-  "-Xlint",
-  "-Xfatal-warnings"
+  "-Xfatal-warnings",
+  "-Xlint:missing-interpolator",
+  "-Xlint"
 )
 javaOptions += "-Xss1m -Xmx2g"
 fork in test := true
