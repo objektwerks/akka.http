@@ -1,8 +1,7 @@
 name := "akka.http"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "2.12.1"
-ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
+scalaVersion := "2.12.3"
 libraryDependencies ++= {
   val akkaVersion = "2.4.14"
   val akkkHttpVersion = "10.0.0"
