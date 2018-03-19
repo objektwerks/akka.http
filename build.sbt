@@ -1,7 +1,7 @@
 name := "akka.http"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.4"
 libraryDependencies ++= {
   val akkaVersion = "2.4.14"
   val akkkHttpVersion = "10.0.0"
@@ -32,4 +32,3 @@ scalacOptions ++= Seq(
   "-Xlint"
 )
 javaOptions += "-Xss1m -Xmx2g"
-fork in test := true
