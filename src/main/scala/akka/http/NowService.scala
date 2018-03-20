@@ -14,6 +14,11 @@ trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
   import akka.http.scaladsl.model.HttpResponse
   implicit val nowFormat = jsonFormat1(Now)
 
+  val resources = path("/") {
+    get {
+      getFromResourceDirectory("/web")
+    }
+  }
   val api = path("now") {
     get {
       complete(ToResponseMarshallable[Now](Now()))
@@ -24,5 +29,5 @@ trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
         }
       }
   }
-  val routes = api
+  val routes = resources ~ api
 }
