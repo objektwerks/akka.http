@@ -19,7 +19,7 @@ trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
       getFromResourceDirectory("/web")
     }
   }
-  val api = path("now") {
+  val api = path("/api/v1/now") {
     get {
       complete(ToResponseMarshallable[Now](Now()))
     } ~
