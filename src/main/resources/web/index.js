@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $("#button-now").click(function() {
         var request = $.ajax({
-            url: "/api/v1/now",
+            url: "/now",
             dataType: "json",
             cache: false
         });
