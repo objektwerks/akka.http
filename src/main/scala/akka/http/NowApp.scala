@@ -9,5 +9,5 @@ class NowApp extends NowService {
   implicit val system = ActorSystem.create("now", ConfigFactory.load("web/app.conf"))
   implicit val executor = system.dispatcher
   implicit val materializer = ActorMaterializer()
-  val server = Http().bindAndHandle(routes, "localhost", 0)
+  val server = Http().bindAndHandle(routes, "localhost", 7979)
 }
