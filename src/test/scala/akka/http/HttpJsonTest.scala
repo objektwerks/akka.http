@@ -9,7 +9,7 @@ import org.scalatest._
 
 class HttpJsonTest extends WordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with NowService {
   val actorRefFactory = ActorSystem.create("now", ConfigFactory.load("test.conf"))
-  val server = Http().bindAndHandle(routes, "localhost", 7878)
+  val server = Http().bindAndHandle(routes, "localhost", 7777)
 
   override protected def afterAll(): Unit = {
     server.flatMap(_.unbind()).onComplete(_ ⇒ system.terminate())
