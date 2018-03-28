@@ -21,8 +21,7 @@ trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
       complete(ToResponseMarshallable[Now](Now()))
     } ~
       post {
-        entity(as[Now]) { _ =>
-          complete(HttpResponse(OK))
+        entity(as[Now]) { _ => complete(HttpResponse(OK))
         }
       }
   }
