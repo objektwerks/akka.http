@@ -15,7 +15,7 @@ trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val nowFormat = jsonFormat1(Now)
 
   val resources = get {
-    getFromResourceDirectory("web")
+    getFromResourceDirectory("public")
   }
   val api = path("now") {
     get {
