@@ -20,6 +20,9 @@ class HttpJsonTest extends WordSpec with Matchers with ScalatestRouteTest with B
       Get("/now") ~> routes ~> check {
         status shouldBe StatusCodes.OK
       }
+      Post("/now", Now()) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+      }
     }
   }
 }
