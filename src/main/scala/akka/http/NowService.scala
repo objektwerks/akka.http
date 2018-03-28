@@ -10,7 +10,6 @@ import spray.json.DefaultJsonProtocol
 case class Now(time: String = LocalTime.now.toString)
 
 trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
-
   import akka.http.scaladsl.marshalling._
   import akka.http.scaladsl.server.Directives._
 
