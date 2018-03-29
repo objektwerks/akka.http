@@ -15,14 +15,14 @@ trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
 
   implicit val nowFormat = jsonFormat1(Now)
 
-  val api = path("now") {
-    get {
-      complete(ToResponseMarshallable[Now](Now()))
-    } ~
-      post {
-        entity(as[Now]) { _ => complete(HttpResponse(OK))
-        }
-      }
+  val getNow = get {
+    complete(ToResponseMarshallable[Now](Now()))
+  }
+  val postNow = post {
+    entity(as[Now]) { _ => complete(HttpResponse(OK)) }
+  }
+  val api = pathPrefix("api" / "v1" / "now") {
+    getNow ~ postNow
   }
   val index = path("") {
     getFromResource("public/index.html")

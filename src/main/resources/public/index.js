@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $("#button-now").click(function() {
         var request = $.ajax({
-            url: "/now",
+            url: "/api/v1/now",
             dataType: "json",
             cache: false
         });
@@ -9,7 +9,7 @@ $(document).ready(function() {
             $("#text-now").text(now.time);
         });
         request.fail(function(xhr, status, error) {
-            console.log("xhr: " + xhr + " : status: " + status + " : error" + error);
+            console.log("xhr: " + JSON.stringify(xhr) + " status: " + status + " error: " + error);
         });
     });
 })

@@ -17,10 +17,10 @@ class HttpJsonTest extends WordSpec with Matchers with ScalatestRouteTest with B
 
   "NowService" should {
     "get and post" in {
-      Get("/now") ~> routes ~> check {
+      Get("/api/v1/now") ~> routes ~> check {
         status shouldBe StatusCodes.OK
       }
-      Post("/now", Now()) ~> routes ~> check {
+      Post("/api/v1/now", Now()) ~> routes ~> check {
         status shouldBe StatusCodes.OK
       }
     }
