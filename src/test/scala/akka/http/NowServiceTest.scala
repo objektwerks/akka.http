@@ -7,7 +7,7 @@ import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.typesafe.config.ConfigFactory
 import org.scalatest._
 
-class HttpJsonTest extends WordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with NowService {
+class NowServiceTest extends WordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with NowService {
   val actorRefFactory = ActorSystem.create("now", ConfigFactory.load("test.conf"))
   val server = Http().bindAndHandle(routes, "localhost", 0)
 
