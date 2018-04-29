@@ -3,6 +3,7 @@ package akka.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.typesafe.config.ConfigFactory
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
@@ -34,7 +35,7 @@ class RestServiceTest extends WordSpec with Matchers with ScalatestRouteTest wit
   "getByUserId -> /users/{id}" should {
     "return user" in {
       Get("/api/v1/locator/users/3") ~> routes ~> check {
-        // status shouldBe StatusCodes.OK
+        status shouldBe StatusCodes.OK
         responseAs[User] shouldEqual User("a1", "mike")
       }
     }
