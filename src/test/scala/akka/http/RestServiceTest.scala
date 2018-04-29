@@ -34,7 +34,7 @@ class RestServiceTest extends WordSpec with Matchers with ScalatestRouteTest wit
 
   "getByUserId -> /users/{id}" should {
     "return user" in {
-      Get("/api/v1/locator/users/3") ~> routes ~> check {
+      Get("/api/v1/locator/users/a1") ~> routes ~> check {
         status shouldBe StatusCodes.OK
         responseAs[User] shouldEqual User("a1", "mike")
       }
