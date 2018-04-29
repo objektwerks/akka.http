@@ -12,7 +12,7 @@ class NowServiceTest extends WordSpec with Matchers with ScalatestRouteTest with
   val server = Http().bindAndHandle(routes, "localhost", 0)
 
   override protected def afterAll(): Unit = {
-    server.flatMap(_.unbind()).onComplete(_ ⇒ system.terminate())
+    server.flatMap(_.unbind()).onComplete(_ => system.terminate())
   }
 
   "NowService" should {
