@@ -19,6 +19,7 @@ import scala.concurrent.duration._
 
 case class Ping(now: String = LocalTime.now.toString)
 
+// Can't use the low-level api to build rest url-driven services.
 trait PingService extends DefaultJsonProtocol with SprayJsonSupport {
   import spray.json._
 
