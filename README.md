@@ -9,4 +9,4 @@ Test
 Run
 ---
 1. sbt run
-2. Open browser to: http://localhost:7777
+2. Open browser to: http://localhost:7777/

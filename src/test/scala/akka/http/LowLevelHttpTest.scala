@@ -52,6 +52,7 @@ class LowLevelHttpTest extends FunSuite with Matchers with BeforeAndAfterAll wit
       println(s"get time response: $response")
       entity
     }
+    import scala.language.postfixOps
     val ping = Await.result(future, 3 seconds)
     println(s"get time ping: $ping")
   }
