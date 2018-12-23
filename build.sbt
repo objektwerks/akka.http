@@ -11,7 +11,6 @@ libraryDependencies ++= {
     "com.typesafe.akka" % "akka-http_2.12" % akkkHttpVersion,
     "com.typesafe.akka" % "akka-http-spray-json_2.12" % akkkHttpVersion,
     "com.typesafe.akka" % "akka-stream_2.12" % akkaVersion,
-    "com.github.swagger-akka-http" %% "swagger-akka-http" % "0.14.0",
     "com.typesafe" % "config" % "1.3.3",
     "ch.qos.logback" % "logback-classic" % "1.2.3",
     "com.typesafe.akka" % "akka-testkit_2.12" % akkaVersion % "test",
