@@ -16,7 +16,9 @@ trait RestService extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val userFormat = jsonFormat2(User)
 
   val getByUserId = path("users" / Segment) { id =>
-    complete(OK -> User(id, "mike"))
+    get {
+      complete(OK -> User(id, "mike"))
+    }
   }
   val routes = pathPrefix("api" / "v1" / "locator") {
     getByUserId
