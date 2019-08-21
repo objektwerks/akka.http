@@ -17,9 +17,9 @@ object NowApp extends App with NowService {
 
   StdIn.readLine()
   server
-    .flatMap(_.unbind())
+    .flatMap(_.unbind)
     .onComplete { _ =>
-      system.terminate()
+      system.terminate
       println("Now app stopped.")
     }
 }

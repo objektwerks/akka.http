@@ -30,7 +30,9 @@ class RestServiceTest extends WordSpec with Matchers with ScalatestRouteTest wit
   val server = Http().bindAndHandle(routes, "localhost", 0)
 
   override protected def afterAll(): Unit = {
-    server.flatMap(_.unbind()).onComplete(_ ⇒ system.terminate())
+    server
+      .flatMap(_.unbind)
+      .onComplete(_ => system.terminate)
   }
 
   "getByUserId -> /users/{id}" should {
