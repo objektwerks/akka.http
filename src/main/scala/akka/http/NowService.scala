@@ -2,16 +2,19 @@ package akka.http
 
 import java.time.LocalTime
 
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model.StatusCodes.OK
-import spray.json.DefaultJsonProtocol
 
 case class Now(time: String = LocalTime.now.toString)
 
-trait NowService extends DefaultJsonProtocol with SprayJsonSupport {
-  import akka.http.scaladsl.server.Directives._
+object Now {
+  import upickle.default._
 
-  implicit val nowFormat = jsonFormat1(Now)
+  implicit val nowRW: ReadWriter[Now] = macroRW
+}
+
+trait NowService {
+  import akka.http.scaladsl.server.Directives._
+  import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
   val getNow = get {
     complete(OK -> Now())

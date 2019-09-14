@@ -2,18 +2,21 @@ package akka.http
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model.StatusCodes.OK
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.typesafe.config.ConfigFactory
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
-import spray.json.DefaultJsonProtocol
 
-trait RestService extends DefaultJsonProtocol with SprayJsonSupport {
+trait RestService {
   import akka.http.scaladsl.server.Directives._
+  import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
   case class User(id: String, name: String)
-  implicit val userFormat = jsonFormat2(User)
+  object User {
+    import upickle.default._
+
+    implicit val userRW: ReadWriter[User] = macroRW
+  }
 
   val getByUserId = path("users" / Segment) { id =>
     get {
@@ -26,6 +29,8 @@ trait RestService extends DefaultJsonProtocol with SprayJsonSupport {
 }
 
 class RestServiceTest extends WordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with RestService {
+  import de.heikoseeberger.akkahttpupickle.UpickleSupport._
+
   val actorRefFactory = ActorSystem.create("user", ConfigFactory.load("test.conf"))
   val server = Http().bindAndHandle(routes, "localhost", 0)
 

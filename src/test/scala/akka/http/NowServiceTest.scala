@@ -8,6 +8,8 @@ import com.typesafe.config.ConfigFactory
 import org.scalatest._
 
 class NowServiceTest extends WordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with NowService {
+  import de.heikoseeberger.akkahttpupickle.UpickleSupport._
+
   val actorRefFactory = ActorSystem.create("now", ConfigFactory.load("test.conf"))
   val server = Http().bindAndHandle(routes, "localhost", 0)
 
