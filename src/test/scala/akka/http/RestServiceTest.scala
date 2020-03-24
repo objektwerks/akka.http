@@ -5,7 +5,9 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes.OK
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.typesafe.config.ConfigFactory
-import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 trait RestService {
   import akka.http.scaladsl.server.Directives._
@@ -28,7 +30,7 @@ trait RestService {
   }
 }
 
-class RestServiceTest extends WordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with RestService {
+class RestServiceTest extends AnyWordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll with RestService {
   import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
   val actorRefFactory = ActorSystem.create("user", ConfigFactory.load("test.conf"))

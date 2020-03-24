@@ -8,9 +8,10 @@ import akka.http.scaladsl.client.RequestBuilding
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
-import org.scalatest.{BeforeAndAfterAll, FunSuite, Matchers}
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -33,11 +34,10 @@ trait PingService {
   }
 }
 
-class LowLevelHttpTest extends FunSuite with Matchers with BeforeAndAfterAll with PingService {
+class LowLevelHttpTest extends AnyFunSuite with Matchers with BeforeAndAfterAll with PingService {
   import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
   implicit val system = ActorSystem.create("ping", ConfigFactory.load("app.conf"))
-  implicit val materializer = ActorMaterializer()
   implicit val executor = system.dispatcher
 
   val server = Http().bindAndHandleSync(requestHandler, "localhost", 7777)
