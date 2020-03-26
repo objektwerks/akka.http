@@ -22,7 +22,7 @@ Test
 Run
 ---
 1. sbt run
-   [1] akka.http.NowApp
-   [2] akka.http.NowSslApp
+   * [1] akka.http.NowApp
+   * [2] akka.http.NowSslApp
 2. Select app.
 3. Open browser to: http://localhost:7777/
