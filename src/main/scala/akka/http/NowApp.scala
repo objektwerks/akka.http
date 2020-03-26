@@ -8,7 +8,7 @@ import scala.io.StdIn
 
 object NowApp extends App with NowService {
   val conf = ConfigFactory.load("now.app.conf")
-  implicit val system = ActorSystem.create(conf.getString("server.name"), conf.getConfig("akka"))
+  implicit val system = ActorSystem.create(conf.getString("server.name"), conf)
   implicit val executor = system.dispatcher
 
   val host = conf.getString("server.host")
