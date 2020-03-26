@@ -3,10 +3,12 @@ package akka.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.{ConnectionContext, Http}
 import com.typesafe.config.ConfigFactory
+import org.slf4j.LoggerFactory
 
 import scala.io.StdIn
 
 object NowSslApp extends App with NowService {
+  val logger = LoggerFactory.getLogger(getClass)
   val conf = ConfigFactory.load("now.ssl.app.conf")
   implicit val system = ActorSystem.create(conf.getString("server.name"), conf)
   implicit val executor = system.dispatcher
@@ -23,13 +25,13 @@ object NowSslApp extends App with NowService {
       connectionContext = sslContext
     )
 
-  println(s"NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
+  logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
 
   StdIn.readLine()
   server
     .flatMap(_.unbind)
     .onComplete { _ =>
       system.terminate
-      println("NowSslApp stopped.")
+      logger.info("*** NowSslApp stopped.")
     }
 }

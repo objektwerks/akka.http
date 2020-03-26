@@ -3,10 +3,12 @@ package akka.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import com.typesafe.config.ConfigFactory
+import org.slf4j.LoggerFactory
 
 import scala.io.StdIn
 
 object NowApp extends App with NowService {
+  val logger = LoggerFactory.getLogger(getClass)
   val conf = ConfigFactory.load("now.app.conf")
   implicit val system = ActorSystem.create(conf.getString("server.name"), conf)
   implicit val executor = system.dispatcher
@@ -20,13 +22,13 @@ object NowApp extends App with NowService {
       port
     )
 
-  println(s"NowApp started at http://$host:$port/\nPress RETURN to stop...")
+  logger.info(s"*** NowApp started at http://$host:$port/\nPress RETURN to stop...")
 
   StdIn.readLine()
   server
     .flatMap(_.unbind)
     .onComplete { _ =>
       system.terminate
-      println("NowApp stopped.")
+      logger.info("*** NowApp stopped.")
     }
 }
