@@ -29,6 +29,6 @@ Run
    * [1] akka.http.NowApp
    * [2] akka.http.NowSslApp
 2. Select app by number.
-3. Open browser to:
-   * NowApp    - http://localhost:7777/
-   * NowSslApp - https://localhost:7777/
+3. Curl commands:
+   * NowApp    - curl http://localhost:7777/api/v1/now
+   * NowSslApp - curl https://localhost:7777/api/v1/now
