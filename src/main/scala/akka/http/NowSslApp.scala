@@ -7,25 +7,29 @@ import com.typesafe.config.ConfigFactory
 import scala.io.StdIn
 
 object NowSslApp extends App with NowService {
-  implicit val system = ActorSystem.create("now", ConfigFactory.load("app.conf"))
+  val conf = ConfigFactory.load("now.ssl.app.conf")
+  implicit val system = ActorSystem.create(conf.getString("server.name"), conf.getConfig("akka"))
   implicit val executor = system.dispatcher
 
-  val sslContext = ConnectionContext.https(SSLContextFactory.newInstance(passphrase = "test"))
+  val host = conf.getString("server.host")
+  val port = conf.getInt("server.port")
+  val passphrase = conf.getString("server.passphrase")
+  val sslContext = ConnectionContext.https(SSLContextFactory.newInstance(passphrase = passphrase))
   val server = Http()
     .bindAndHandle(
       routes,
-      "localhost",
-      7777,
+      host,
+      port,
       connectionContext = sslContext
     )
 
-  println(s"NowSsl app started at http://localhost:7777/\nPress RETURN to stop...")
+  println(s"NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
 
   StdIn.readLine()
   server
     .flatMap(_.unbind)
     .onComplete { _ =>
       system.terminate
-      println("NowSsl app stopped.")
+      println("NowSslApp stopped.")
     }
 }

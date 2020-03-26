@@ -37,7 +37,7 @@ trait PingService {
 class LowLevelHttpTest extends AnyFunSuite with Matchers with BeforeAndAfterAll with PingService {
   import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
-  implicit val system = ActorSystem.create("ping", ConfigFactory.load("app.conf"))
+  implicit val system = ActorSystem.create("ping", ConfigFactory.load("now.app.conf"))
   implicit val executor = system.dispatcher
 
   val server = Http().bindAndHandleSync(requestHandler, "localhost", 7777)

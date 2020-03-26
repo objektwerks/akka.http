@@ -7,17 +7,26 @@ import com.typesafe.config.ConfigFactory
 import scala.io.StdIn
 
 object NowApp extends App with NowService {
-  implicit val system = ActorSystem.create("now", ConfigFactory.load("app.conf"))
+  val conf = ConfigFactory.load("now.app.conf")
+  implicit val system = ActorSystem.create(conf.getString("server.name"), conf.getConfig("akka"))
   implicit val executor = system.dispatcher
 
-  val server = Http().bindAndHandle(routes, "localhost", 7777)
-  println(s"Now app started at http://localhost:7777/\nPress RETURN to stop...")
+  val host = conf.getString("server.host")
+  val port = conf.getInt("server.port")
+  val server = Http()
+    .bindAndHandle(
+      routes,
+      host,
+      port
+    )
+
+  println(s"NowApp started at http://$host:$port/\nPress RETURN to stop...")
 
   StdIn.readLine()
   server
     .flatMap(_.unbind)
     .onComplete { _ =>
       system.terminate
-      println("Now app stopped.")
+      println("NowApp stopped.")
     }
 }
