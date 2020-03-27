@@ -4,9 +4,15 @@ Akka Http
 
 SSL
 ---
->See ( https://blog.knoldus.com/create-a-self-signed-ssl-certificate-using-openssl/ ) for directions.
+>See:
+1. https://blog.knoldus.com/create-a-self-signed-ssl-certificate-using-openssl/
+2. https://blog.knoldus.com/how-to-create-a-keystore-in-pkcs12-format/
+
+SSL Passwords
+-------------
 1. Server Key Passphrase: test
 2. Challenge Password: test
+3. Server PEM: test
 
 SSL Artifacts
 -------------
@@ -14,6 +20,8 @@ SSL Artifacts
 1. server.crt
 2. server.csr
 3. server.key
+4. server.pem
+5. keystore.pkcs12
 
 Https
 -----
