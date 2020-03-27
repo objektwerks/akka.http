@@ -19,7 +19,7 @@ object SSLContextFactory {
     trustManagerFactory.init(keystore)
 
     val sslContext = SSLContext.getInstance("TLS")
-    sslContext.init(keyManagerFactory.getKeyManagers, trustManagerFactory.getTrustManagers, new SecureRandom)
+    sslContext.init(keyManagerFactory.getKeyManagers, trustManagerFactory.getTrustManagers, new SecureRandom())
     sslContext
   }
 }
