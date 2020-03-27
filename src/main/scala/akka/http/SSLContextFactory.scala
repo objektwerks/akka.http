@@ -6,10 +6,10 @@ import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
 object SSLContextFactory {
   def newInstance(passphrase: String): SSLContext = {
-    val keystore = KeyStore.getInstance("PKCS12")
-    val serverKey = getClass.getClassLoader.getResourceAsStream("/server.key")
+    val inputstream = getClass.getClassLoader.getResourceAsStream("/keystore.pkcs12")
     val password = passphrase.toCharArray
-    keystore.load(serverKey, password)
+    val keystore = KeyStore.getInstance("PKCS12")
+    keystore.load(inputstream, password)
 
     val keyManagerFactory = KeyManagerFactory.getInstance("SunX509")
     keyManagerFactory.init(keystore, password)
