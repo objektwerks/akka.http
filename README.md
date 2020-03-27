@@ -46,6 +46,12 @@ Run
                       --cacert ./src/main/resources/server.pem \
                       --cert-status \
                       -v https://localhost:7443/api/v1/now
+                      
+               - wget --certificate=./src/main/resources/server.pem \
+                      --certificate-type=PEM \
+                      --ca-certificate=./src/main/resources/server.crt \
+                      --ca-directory=./src/main/resources \
+                      https://localhost:7443/api/v1/now
 4. Browser:
    * NowApp    - http://localhost:7777/
    * NowSslApp - https://localhost:7443/
