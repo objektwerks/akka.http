@@ -10,6 +10,7 @@ object SSLContextFactory {
     val password = passphrase.toCharArray
     val keystore = KeyStore.getInstance("PKCS12")
     keystore.load(inputstream, password)
+    require(keystore != null, "Keystore is null. Load a valid keystore file.")
 
     val keyManagerFactory = KeyManagerFactory.getInstance("SunX509")
     keyManagerFactory.init(keystore, password)
