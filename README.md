@@ -13,6 +13,7 @@ SSL Passwords
 1. Server Key Passphrase: test
 2. Challenge Password: test
 3. Server PEM: test
+4. Export Password: test
 
 SSL Artifacts
 -------------
