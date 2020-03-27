@@ -38,7 +38,7 @@ Run
    * [1] akka.http.NowApp
    * [2] akka.http.NowSslApp
 2. Select app by number.
-3. Curl:
+3. Curl: **Doesn't work!**
    * NowApp    - curl http://localhost:7777/api/v1/now
    * NowSslApp - curl --capath ./src/main/resources \
                       --cert-type PEM \
@@ -46,8 +46,8 @@ Run
                       --cacert ./src/main/resources/server.pem \
                       --cert-status \
                       -v https://localhost:7443/api/v1/now
-                      
-               - wget --certificate=./src/main/resources/server.pem \
+4. WGet: **Doesn't work!**                      
+   * NowSslApp - wget --certificate=./src/main/resources/server.pem \
                       --certificate-type=PEM \
                       --ca-certificate=./src/main/resources/server.crt \
                       --ca-directory=./src/main/resources \
