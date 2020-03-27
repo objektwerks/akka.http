@@ -40,16 +40,16 @@ Run
 2. Select app by number.
 3. Curl: **Doesn't work!**
    * NowApp    - curl http://localhost:7777/api/v1/now
-   * NowSslApp - curl --cacert /private/etc/ssl/cert.pem \
-                      --capath /private/etc/ssl \
+   * NowSslApp - curl --cacert /etc/ssl/cert.pem \
+                      --capath /etc/ssl/ \
                       --cert-type PEM \
-                      --cert ./src/main/resources/server.pem:test \
+                      --cert /etc/ssl/server.pem:test \
                       -v https://localhost:7443/api/v1/now
 4. WGet: **Doesn't work!**                      
-   * NowSslApp - wget --ca-certificate=/private/etc/ssl/cert.pem \
-                      --ca-directory=/private/etc/ssl \
+   * NowSslApp - wget --ca-certificate=/etc/ssl/cert.pem \
+                      --ca-directory=/etc/ssl/ \
                       --certificate-type=PEM \
-                      --certificate=./src/main/resources/server.pem \
+                      --certificate=/etc/ssl/server.pem \
                       https://localhost:7443/api/v1/now
 4. Browser:
    * NowApp    - http://localhost:7777/
