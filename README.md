@@ -6,7 +6,7 @@ SSL
 ---
 >See ( https://blog.knoldus.com/create-a-self-signed-ssl-certificate-using-openssl/ ) for directions.
 1. Server Key Passphrase: test
-2. Challenge Password: jaaaannnn
+2. Challenge Password: test
 
 SSL Artifacts
 -------------
