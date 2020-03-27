@@ -26,8 +26,8 @@ SSL Artifacts
 
 Https
 -----
->See ( https://doc.akka.io/docs/akka-http/current/server-side/server-https-support.html#using-https ) for details.
-
+>See ( https://doc.akka.io/docs/akka-http/current/server-side/server-https-support.html ) for details.
+       
 Test
 ----
 1. sbt clean test
