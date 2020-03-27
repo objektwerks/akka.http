@@ -43,4 +43,4 @@ Run
    * NowSslApp - curl --cacert ./src/main/resources/server.pem -v https://localhost:7443/api/v1/now
 4. Browser:
    * NowApp    - http://localhost:7777/
-   * NowSslApp - https://localhost:7777/
+   * NowSslApp - https://localhost:7443/
