@@ -16,13 +16,15 @@ object NowSslApp extends App with NowService {
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
   val passphrase = conf.getString("server.passphrase")
-  val sslContext = ConnectionContext.https(SSLContextFactory.newInstance(passphrase = passphrase))
+  val sslContext = SSLContextFactory.newInstance(passphrase = passphrase)
+  val httpsConnection = ConnectionContext.https(sslContext)
+  Http().setDefaultServerHttpContext(httpsConnection)
   val server = Http()
     .bindAndHandle(
       routes,
       host,
       port,
-      connectionContext = sslContext
+      connectionContext = httpsConnection
     )
 
   logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
