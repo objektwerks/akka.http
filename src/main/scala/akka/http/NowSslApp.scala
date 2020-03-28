@@ -20,7 +20,7 @@ object NowSslApp extends App with NowService {
   val sslContext = SSLContextFactory.newInstance(passphrase = passphrase)
   val httpsContext = ConnectionContext.https(sslContext)
   val http = Http()
-  http.setDefaultClientHttpsContext(httpsContext)
+  http.setDefaultServerHttpContext(httpsContext)
   val server = http
     .bindAndHandle(
       routes,
