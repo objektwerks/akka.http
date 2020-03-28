@@ -30,8 +30,10 @@ object NowSslApp extends App with NowService {
     )
   logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
 
+  val client = Http()
+  client.setDefaultClientHttpsContext(httpsContext)
   val service = conf.getString("server.service")
-  val future = http.singleRequest(HttpRequest(uri = s"https://$host:$port$service"))
+  val future = client.singleRequest(HttpRequest(uri = s"https://$host:$port$service"))
   future
     .onComplete {
       case Success(now) => logger.info(s"*** The current now is: $now")
