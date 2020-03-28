@@ -24,6 +24,11 @@ SSL Artifacts
 4. server.pem
 5. keystore.pkcs12
 
+OpenSSL@1.1
+-----------
+>To add additional certificates, place .pem files in /usr/local/etc/openssl@1.1/certs
+>and run /usr/local/opt/openssl@1.1/bin/c_rehash
+
 Https
 -----
 >See ( https://doc.akka.io/docs/akka-http/current/server-side/server-https-support.html ) for details.
