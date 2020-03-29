@@ -1,12 +1,10 @@
 package akka.http
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.model.HttpRequest
 import akka.http.scaladsl.{ConnectionContext, Http}
 import com.typesafe.config.ConfigFactory
 
 import scala.io.StdIn
-import scala.util.{Failure, Success}
 
 object NowSslApp extends App with NowService {
   val conf = ConfigFactory.load("now.ssl.app.conf")
@@ -29,14 +27,6 @@ object NowSslApp extends App with NowService {
       connectionContext = httpsContext
     )
   logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
-
-  val client = Http()
-  client.setDefaultClientHttpsContext(httpsContext)
-  val service = conf.getString("server.service")
-  client.singleRequest(HttpRequest(uri = s"https://$host:$port$service")).onComplete {
-    case Success(now) => logger.info(s"*** The current now is: $now")
-    case Failure(error) => logger.error(s"*** Now service failed: ${error.toString}")
-  }
 
   StdIn.readLine()
   server
