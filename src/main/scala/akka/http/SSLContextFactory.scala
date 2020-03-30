@@ -7,7 +7,7 @@ import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
 object SSLContextFactory {
   def newInstance(passphrase: String): SSLContext = {
-    val inputstream = new FileInputStream("./x509/example.com.jks")
+    val inputstream = new FileInputStream("./x509/localhost.jks")
     val password = passphrase.toCharArray
     val keystore = KeyStore.getInstance("JKS")
     keystore.load(inputstream, password)
