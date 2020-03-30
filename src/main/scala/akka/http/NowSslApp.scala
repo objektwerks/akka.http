@@ -34,7 +34,7 @@ object NowSslApp extends App with NowService {
   client.setDefaultClientHttpsContext(httpsContext)
   val service = conf.getString("server.service")
   client.singleRequest(HttpRequest(uri = s"https://$host:$port$service")).onComplete {
-    case Success(now) => logger.info(s"*** Now service: $now")
+    case Success(response) => response.entity.dataBytes.map(_.utf8String).runForeach(json => logger.info(s"*** Now service: $json"))
     case Failure(error) => logger.error(s"*** Now service failed: ${error.toString}")
   }
 
