@@ -4,7 +4,7 @@ import java.time.LocalTime
 
 import akka.http.scaladsl.model.StatusCodes.OK
 
-case class Now(time: String = LocalTime.now.toString)
+case class Now(time: String = s"*** The current local time is: ${LocalTime.now.toString}")
 
 object Now {
   import upickle.default._
