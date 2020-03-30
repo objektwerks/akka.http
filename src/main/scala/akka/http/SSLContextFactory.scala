@@ -6,7 +6,10 @@ import java.security.{KeyStore, SecureRandom}
 import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
 object SSLContextFactory {
-  def newInstance(passphrase: String, keystorePath: String, keystoreType: String): SSLContext = {
+  def newInstance(passphrase: String,
+                  keystorePath: String,
+                  keystoreType: String,
+                  sslContextProtocol: String): SSLContext = {
     val inputstream = new FileInputStream(keystorePath)
     val password = passphrase.toCharArray
     val keystore = KeyStore.getInstance(keystoreType)
@@ -19,7 +22,7 @@ object SSLContextFactory {
     val trustManagerFactory = TrustManagerFactory.getInstance("SunX509")
     trustManagerFactory.init(keystore)
 
-    val sslContext = SSLContext.getInstance("TLS")
+    val sslContext = SSLContext.getInstance(sslContextProtocol)
     sslContext.init(keyManagerFactory.getKeyManagers, trustManagerFactory.getTrustManagers, new SecureRandom())
     sslContext
   }
