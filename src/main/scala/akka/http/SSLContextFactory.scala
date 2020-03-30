@@ -6,12 +6,12 @@ import java.security.{KeyStore, SecureRandom}
 import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
 object SSLContextFactory {
-  def newInstance(passphrase: String, keystorePath: String): SSLContext = {
+  def newInstance(passphrase: String, keystorePath: String, keystoreType: String): SSLContext = {
     val inputstream = new FileInputStream(keystorePath)
     val password = passphrase.toCharArray
-    val keystore = KeyStore.getInstance("JKS")
+    val keystore = KeyStore.getInstance(keystoreType)
     keystore.load(inputstream, password)
-    require(keystore != null, "Keystore is null. Load a valid keystore file.")
+    require(keystore != null, s"Keystore [ $keystorePath ] is null. Load a valid keystore file.")
 
     val keyManagerFactory = KeyManagerFactory.getInstance("SunX509")
     keyManagerFactory.init(keystore, password)
