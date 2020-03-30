@@ -1,14 +1,15 @@
 package akka.http
 
+import java.io.FileInputStream
 import java.security.{KeyStore, SecureRandom}
 
 import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
 object SSLContextFactory {
   def newInstance(passphrase: String): SSLContext = {
-    val inputstream = getClass.getClassLoader.getResourceAsStream("/keystore.pkcs12")
+    val inputstream = new FileInputStream("./x509/example.com.jks")
     val password = passphrase.toCharArray
-    val keystore = KeyStore.getInstance("PKCS12")
+    val keystore = KeyStore.getInstance("JKS")
     keystore.load(inputstream, password)
     require(keystore != null, "Keystore is null. Load a valid keystore file.")
 
