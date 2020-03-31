@@ -5,14 +5,14 @@ import java.security.{KeyStore, SecureRandom}
 
 import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
-case class SSLContextFactoryConf(passphrase: String,
-                                 keystorePath: String,
-                                 keystoreType: String,
-                                 sslContextProtocol: String,
-                                 algorithm: String)
+case class SSLContextConf(passphrase: String,
+                          keystorePath: String,
+                          keystoreType: String,
+                          sslProtocol: String,
+                          algorithm: String)
 
 object SSLContextFactory {
-  def newInstance(conf: SSLContextFactoryConf): SSLContext = {
+  def newInstance(conf: SSLContextConf): SSLContext = {
     val inputstream = new FileInputStream(conf.keystorePath)
     val password = conf.passphrase.toCharArray
     val keystore = KeyStore.getInstance(conf.keystoreType)
@@ -25,7 +25,7 @@ object SSLContextFactory {
     val trustManagerFactory = TrustManagerFactory.getInstance(conf.algorithm)
     trustManagerFactory.init(keystore)
 
-    val sslContext = SSLContext.getInstance(conf.sslContextProtocol)
+    val sslContext = SSLContext.getInstance(conf.sslProtocol)
     sslContext.init(keyManagerFactory.getKeyManagers, trustManagerFactory.getTrustManagers, new SecureRandom())
     sslContext
   }
