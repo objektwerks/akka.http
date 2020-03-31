@@ -10,14 +10,16 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import scala.io.StdIn
 import scala.util.{Failure, Success}
 
-case class ServerConf(name: String, host: String, port: Int, service: String)
+case class ServerConf(name: String, host: String, port: Int, service: String) {
+  def tuple: (String, String, Int, String) = (name, host, port, service)
+}
 
 object NowSslApp extends App with NowService {
   val conf = ConfigFactory.load("now.ssl.app.conf")
-  val serverConf = conf.as[ServerConf]("server")
+  val (name, host, port, service) = conf.as[ServerConf]("server").tuple
   val sslContextConf = conf.as[SSLContextConf]("ssl")
 
-  implicit val system = ActorSystem.create(serverConf.name, conf)
+  implicit val system = ActorSystem.create(name, conf)
   implicit val executor = system.dispatcher
   val logger = system.log
 
@@ -28,16 +30,15 @@ object NowSslApp extends App with NowService {
   val server = http
     .bindAndHandle(
       routes,
-      serverConf.host,
-      serverConf.port,
+      host,
+      port,
       connectionContext = httpsContext
     )
-  logger.info(s"*** NowSslApp started at https://${serverConf.host}:${serverConf.port}/\nPress RETURN to stop...")
+  logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
 
   val client = Http()
   client.setDefaultClientHttpsContext(httpsContext)
-  val url = s"https://${serverConf.host}:${serverConf.port}${serverConf.service}"
-  client.singleRequest(HttpRequest(uri = url)).onComplete {
+  client.singleRequest(HttpRequest(uri = s"https://$host:$port$service")).onComplete {
     case Success(response) => response.entity.dataBytes.map(_.utf8String).runForeach(json => logger.info(s"*** Now service: $json"))
     case Failure(error) => logger.error(s"*** Now service failed: ${error.toString}")
   }
