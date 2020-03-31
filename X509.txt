@@ -84,7 +84,7 @@ keytool -list -v \
 
 [ Create PKCS12 Keystore ]
 
-1. Create a PKCS#12 keystore containing the public and private keys.
+1. Create a PKCS12 keystore containing the public and private keys.
 keytool -importkeystore -v \
 -srcalias localhost \
 -srckeystore localhost.jks \
