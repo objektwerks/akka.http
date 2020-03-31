@@ -23,7 +23,6 @@ object NowSslApp extends App with NowService {
   implicit val executor = system.dispatcher
   val logger = system.log
 
-  logger.info(s"*** SSL context conf: ${sslContextConf.toString}")
   val sslContext = SSLContextFactory.newInstance(sslContextConf)
   val httpsContext = ConnectionContext.https(sslContext)
   val http = Http()
@@ -35,6 +34,7 @@ object NowSslApp extends App with NowService {
       port,
       connectionContext = httpsContext
     )
+  logger.info(s"*** SSL context conf: ${sslContextConf.toString}")
   logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
 
   val client = Http()
