@@ -43,7 +43,7 @@ class LowLevelHttpTest extends AnyFunSuite with Matchers with BeforeAndAfterAll 
   val server = Http().bindAndHandleSync(requestHandler, "localhost", 7777)
 
   override protected def afterAll(): Unit = {
-    server.flatMap(_.unbind()).onComplete(_ ⇒ system.terminate())
+    server.flatMap(_.unbind()).onComplete(_ => system.terminate())
   }
 
   test("get time") {

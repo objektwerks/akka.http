@@ -1,7 +1,7 @@
 name := "akka.http"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "2.12.11"
+scalaVersion := "2.13.2"
 libraryDependencies ++= {
   val akkaVersion = "2.6.5"
   val akkkHttpVersion = "10.1.12"
