@@ -24,16 +24,12 @@ object NowSslApp extends App with NowService {
   val logger = system.log
 
   val sslContext = SSLContextFactory.newInstance(sslContextConf)
-  val httpsContext = ConnectionContext.https(sslContext)
-  val http = Http()
-  http.setDefaultServerHttpContext(httpsContext)
-  val server = http
-    .bindAndHandle(
-      routes,
-      host,
-      port,
-      connectionContext = httpsContext
-    )
+  val httpsContext = ConnectionContext.httpsServer(sslContext)
+  val server = Http()
+    .newServerAt(host, port)
+    .enableHttps(httpsContext)
+    .bindFlow(routes)
+
   logger.info(s"*** SSL context conf: ${sslContextConf.toString}")
   logger.info(s"*** NowSslApp started at https://$host:$port/\nPress RETURN to stop...")
 

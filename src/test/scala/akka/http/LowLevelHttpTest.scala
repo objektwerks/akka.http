@@ -40,7 +40,9 @@ class LowLevelHttpTest extends AnyFunSuite with Matchers with BeforeAndAfterAll 
   implicit val system = ActorSystem.create("ping", ConfigFactory.load("test.conf"))
   implicit val executor = system.dispatcher
 
-  val server = Http().bindAndHandleSync(requestHandler, "localhost", 7777)
+  val server = Http()
+    .newServerAt("localhost", 7777)
+    .bindSync(requestHandler)
 
   override protected def afterAll(): Unit = {
     server.flatMap(_.unbind()).onComplete(_ => system.terminate())

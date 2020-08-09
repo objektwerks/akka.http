@@ -16,11 +16,8 @@ object NowApp extends App with NowService {
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
   val server = Http()
-    .bindAndHandle(
-      routes,
-      host,
-      port
-    )
+    .newServerAt(host, port)
+    .bindFlow(routes)
 
   logger.info(s"*** NowApp started at http://$host:$port/\nPress RETURN to stop...")
 

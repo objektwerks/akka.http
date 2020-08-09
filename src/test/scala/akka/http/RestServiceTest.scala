@@ -34,7 +34,9 @@ class RestServiceTest extends AnyWordSpec with Matchers with ScalatestRouteTest 
   import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
   val actorRefFactory = ActorSystem.create("user", ConfigFactory.load("test.conf"))
-  val server = Http().bindAndHandle(routes, "localhost", 0)
+  val server = Http()
+    .newServerAt("localhost", 0)
+    .bindFlow(routes)
 
   override protected def afterAll(): Unit = {
     server
