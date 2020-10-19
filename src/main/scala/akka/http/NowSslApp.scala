@@ -3,7 +3,9 @@ package akka.http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.HttpRequest
 import akka.http.scaladsl.{ConnectionContext, Http}
+
 import com.typesafe.config.ConfigFactory
+
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
@@ -42,9 +44,9 @@ object NowSslApp extends App with NowService {
 
   StdIn.readLine()
   server
-    .flatMap(_.unbind)
+    .flatMap(_.unbind())
     .onComplete { _ =>
-      system.terminate
+      system.terminate()
       logger.info("*** NowSslApp stopped.")
     }
 }

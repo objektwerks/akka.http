@@ -8,7 +8,9 @@ import akka.http.scaladsl.client.RequestBuilding
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.unmarshalling.Unmarshal
+
 import com.typesafe.config.ConfigFactory
+
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers

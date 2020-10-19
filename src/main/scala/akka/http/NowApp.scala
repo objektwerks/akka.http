@@ -2,7 +2,9 @@ package akka.http
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
+
 import com.typesafe.config.ConfigFactory
+
 import org.slf4j.LoggerFactory
 
 import scala.io.StdIn
@@ -23,9 +25,9 @@ object NowApp extends App with NowService {
 
   StdIn.readLine()
   server
-    .flatMap(_.unbind)
+    .flatMap(_.unbind())
     .onComplete { _ =>
-      system.terminate
+      system.terminate()
       logger.info("*** NowApp stopped.")
     }
 }

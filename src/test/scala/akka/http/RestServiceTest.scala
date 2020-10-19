@@ -4,7 +4,9 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes.OK
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+
 import com.typesafe.config.ConfigFactory
+
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -40,8 +42,8 @@ class RestServiceTest extends AnyWordSpec with Matchers with ScalatestRouteTest 
 
   override protected def afterAll(): Unit = {
     server
-      .flatMap(_.unbind)
-      .onComplete(_ => system.terminate)
+      .flatMap(_.unbind())
+      .onComplete(_ => system.terminate())
   }
 
   "getByUserId -> /users/{id}" should {

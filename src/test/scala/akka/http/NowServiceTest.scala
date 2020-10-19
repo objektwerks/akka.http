@@ -4,7 +4,9 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+
 import com.typesafe.config.ConfigFactory
+
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -19,8 +21,8 @@ class NowServiceTest extends AnyWordSpec with Matchers with ScalatestRouteTest w
 
   override protected def afterAll(): Unit = {
     server
-      .flatMap(_.unbind)
-      .onComplete(_ => system.terminate)
+      .flatMap(_.unbind())
+      .onComplete(_ => system.terminate())
   }
 
   "NowService" should {
