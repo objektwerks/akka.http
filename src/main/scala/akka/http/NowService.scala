@@ -4,12 +4,14 @@ import java.time.LocalTime
 
 import akka.http.scaladsl.model.StatusCodes.OK
 
+import scala.annotation.nowarn
+
 case class Now(time: String = LocalTime.now.toString)
 
 object Now {
   import upickle.default._
 
-  implicit val nowRW: ReadWriter[Now] = macroRW
+  @nowarn implicit val nowRW: ReadWriter[Now] = macroRW
 }
 
 trait NowService {

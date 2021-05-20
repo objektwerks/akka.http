@@ -17,12 +17,13 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.annotation.nowarn
 
 case class Ping(now: String = LocalTime.now.toString)
 object Ping {
   import upickle.default._
 
-  implicit val pingRW: ReadWriter[Ping] = macroRW
+  @nowarn implicit val pingRW: ReadWriter[Ping] = macroRW
 }
 
 // Can't use the low-level api to build rest url-driven services.
