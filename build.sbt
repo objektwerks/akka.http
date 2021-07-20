@@ -10,7 +10,7 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
     "com.typesafe.akka" %% "akka-http" % akkkHttpVersion,
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
-    "de.heikoseeberger" %% "akka-http-upickle" % "1.36.0",
+    "de.heikoseeberger" %% "akka-http-upickle" % "1.37.0",
     "com.lihaoyi" %% "upickle" % "1.4.0",
     "com.typesafe" % "config" % "1.4.0",
     "com.iheart" %% "ficus" % "1.5.0",
