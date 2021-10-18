@@ -13,7 +13,7 @@ libraryDependencies ++= {
     "de.heikoseeberger" %% "akka-http-upickle" % "1.38.2",
     "com.lihaoyi" %% "upickle" % "1.4.2",
     "com.typesafe" % "config" % "1.4.1",
-    "com.iheart" %% "ficus" % "1.5.0",
+    "com.iheart" %% "ficus" % "1.5.1",
     "ch.qos.logback" % "logback-classic" % "1.2.6",
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
     "com.typesafe.akka" %% "akka-http-testkit" % akkkHttpVersion % Test,
