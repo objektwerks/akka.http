@@ -14,7 +14,7 @@ libraryDependencies ++= {
     "com.lihaoyi" %% "upickle" % "3.1.0",
     "com.typesafe" % "config" % "1.4.2",
     "com.iheart" %% "ficus" % "1.5.2",
-    "ch.qos.logback" % "logback-classic" % "1.4.6",
+    "ch.qos.logback" % "logback-classic" % "1.4.7",
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
     "com.typesafe.akka" %% "akka-http-testkit" % akkkHttpVersion % Test,
     "org.scalatest" %% "scalatest" % "3.2.15" % Test
