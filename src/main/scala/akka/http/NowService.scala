@@ -4,13 +4,13 @@ import java.time.LocalTime
 
 import akka.http.scaladsl.model.StatusCodes.OK
 
-case class Now(time: String = LocalTime.now.toString)
-
 object Now {
   import upickle.default._
 
   implicit val nowRW: ReadWriter[Now] = macroRW
 }
+
+case class Now(time: String = LocalTime.now.toString)
 
 trait NowService {
   import akka.http.scaladsl.server.Directives._
