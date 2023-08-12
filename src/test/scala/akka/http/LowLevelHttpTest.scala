@@ -15,7 +15,7 @@ import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-import scala.concurrent.Await
+import scala.concurrent.{Await, ExecutionContext}
 import scala.concurrent.duration._
 
 case class Ping(now: String = LocalTime.now.toString)
@@ -39,8 +39,8 @@ trait PingService {
 class LowLevelHttpTest extends AnyFunSuite with Matchers with BeforeAndAfterAll with PingService {
   import de.heikoseeberger.akkahttpupickle.UpickleSupport._
 
-  implicit val system = ActorSystem.create("ping", ConfigFactory.load("test.conf"))
-  implicit val executor = system.dispatcher
+  implicit val system: ActorSystem = ActorSystem.create("ping", ConfigFactory.load("test.conf"))
+  implicit val executor: ExecutionContext = system.dispatcher
 
   val server = Http()
     .newServerAt("localhost", 7777)
