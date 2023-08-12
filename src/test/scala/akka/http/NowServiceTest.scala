@@ -28,7 +28,9 @@ class NowServiceTest extends AnyWordSpec with Matchers with ScalatestRouteTest w
   "NowService" should {
     "get and post" in {
       Get("/api/v1/now") ~> routes ~> check {
-        status shouldBe StatusCodes.OK
+        val assertion = status shouldBe StatusCodes.OK
+        println(s"*** Now Service get and post assertion: ${assertion.toString}")
+        ()
       }
       Post("/api/v1/now", Now()) ~> routes ~> check {
         status shouldBe StatusCodes.OK
