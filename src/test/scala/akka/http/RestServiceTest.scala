@@ -49,7 +49,8 @@ class RestServiceTest extends AnyWordSpec with Matchers with ScalatestRouteTest 
   "getByUserId -> /users/{id}" should {
     "return user" in {
       Get("/api/v1/locator/users/a1") ~> routes ~> check {
-        status shouldBe OK
+        val assertion = status shouldBe OK
+        println(s"*** Rest Service get user assertion: ${assertion.toString}")
         responseAs[User] shouldEqual User("a1", "mike")
       }
     }
