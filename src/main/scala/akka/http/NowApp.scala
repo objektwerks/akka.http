@@ -7,13 +7,14 @@ import com.typesafe.config.ConfigFactory
 
 import org.slf4j.LoggerFactory
 
+import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 
 object NowApp extends App with NowService {
   val logger = LoggerFactory.getLogger(getClass)
   val conf = ConfigFactory.load("now.app.conf")
-  implicit val system = ActorSystem.create(conf.getString("server.name"), conf)
-  implicit val executor = system.dispatcher
+  implicit val system: ActorSystem = ActorSystem.create(conf.getString("server.name"), conf)
+  implicit val executor: ExecutionContext = system.dispatcher
 
   val host = conf.getString("server.host")
   val port = conf.getInt("server.port")
@@ -23,11 +24,12 @@ object NowApp extends App with NowService {
 
   logger.info(s"*** NowApp started at http://$host:$port/\nPress RETURN to stop...")
 
-  StdIn.readLine()
+  val line = StdIn.readLine()
+  logger.info(s"*** NowApp stdin line: $line.")
   server
     .flatMap(_.unbind())
     .onComplete { _ =>
-      system.terminate()
+      system.terminate().foreach(terminated => logger.info(s"*** NowApp terminated? ${terminated.addressTerminated}"))
       logger.info("*** NowApp stopped.")
     }
 }
