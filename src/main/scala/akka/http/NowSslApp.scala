@@ -9,6 +9,7 @@ import com.typesafe.config.ConfigFactory
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
+import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 import scala.util.{Failure, Success}
 
@@ -21,8 +22,8 @@ object NowSslApp extends App with NowService {
   val (name, host, port, service) = conf.as[ServerConf]("server").tuple
   val sslContextConf = conf.as[SSLContextConf]("ssl")
 
-  implicit val system = ActorSystem.create(name, conf)
-  implicit val executor = system.dispatcher
+  implicit val system: ActorSystem = ActorSystem.create(name, conf)
+  implicit val executor: ExecutionContext = system.dispatcher
   val logger = system.log
 
   val sslContext = SSLContextFactory.newInstance(sslContextConf)
@@ -42,11 +43,12 @@ object NowSslApp extends App with NowService {
     case Failure(error) => logger.error(s"*** Now service failed: ${error.toString}")
   }
 
-  StdIn.readLine()
+  val line = StdIn.readLine()
+  logger.info(s"*** NowSslApp stdin line: $line.")
   server
     .flatMap(_.unbind())
     .onComplete { _ =>
-      system.terminate()
+      system.terminate().foreach(terminated => logger.info(s"*** NowSslApp terminated? ${terminated.addressTerminated}"))
       logger.info("*** NowSslApp stopped.")
     }
 }
