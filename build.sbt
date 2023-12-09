@@ -14,7 +14,7 @@ libraryDependencies ++= {
     "com.lihaoyi" %% "upickle" % "1.4.3", // Don't edit! akka-http-upickle depends on this version!
     "com.typesafe" % "config" % "1.4.2",
     "com.iheart" %% "ficus" % "1.5.2",
-    "ch.qos.logback" % "logback-classic" % "1.4.13",
+    "ch.qos.logback" % "logback-classic" % "1.4.14",
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
     "com.typesafe.akka" %% "akka-http-testkit" % akkkHttpVersion % Test,
     "org.scalatest" %% "scalatest" % "3.2.17" % Test
