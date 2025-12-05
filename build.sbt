@@ -11,7 +11,7 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-http" % akkkHttpVersion,
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
     "de.heikoseeberger" %% "akka-http-upickle" % "1.39.2",
-    "com.lihaoyi" %% "upickle" % "4.4.1",
+    "com.lihaoyi" %% "upickle" % "4.4.2-RC",
     "com.typesafe" % "config" % "1.4.3",
     "com.iheart" %% "ficus" % "1.5.2",
     "ch.qos.logback" % "logback-classic" % "1.5.21",
